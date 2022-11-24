@@ -263,6 +263,9 @@ func (j *JSONQ) WhereNotIn(key string, val interface{}) *JSONQ {
 // OrWhere builds an OrWhere clause, basically it's a group of AND clauses
 func (j *JSONQ) OrWhere(key, cond string, val interface{}) *JSONQ {
 	if j.queryIndex == 0 {
+		defer func() {
+			j.queryIndex++
+		}()
 		return j.Where(key, cond, val)
 	}
 
