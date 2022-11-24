@@ -262,6 +262,10 @@ func (j *JSONQ) WhereNotIn(key string, val interface{}) *JSONQ {
 
 // OrWhere builds an OrWhere clause, basically it's a group of AND clauses
 func (j *JSONQ) OrWhere(key, cond string, val interface{}) *JSONQ {
+	if j.queryIndex == 0 {
+		return j.Where(key, cond, val)
+	}
+
 	j.queryIndex++
 	var qq []query
 	qq = append(qq, query{
@@ -271,6 +275,7 @@ func (j *JSONQ) OrWhere(key, cond string, val interface{}) *JSONQ {
 	})
 	j.queries = append(j.queries, qq)
 	return j
+
 }
 
 // WhereStartsWith satisfies Where clause which starts with provided value(string)
