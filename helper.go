@@ -33,6 +33,17 @@ func getIndex(in string) (int, error) {
 	return oint, nil
 }
 
+func toStr(v interface{}) (string, bool) {
+	var s string
+	var flag bool
+	switch u := v.(type) {
+	case int:
+		flag = true
+		s = string(u)
+	}
+	return s, flag
+}
+
 func toString(v interface{}) string {
 	return fmt.Sprintf("%v", v)
 }

@@ -73,6 +73,11 @@ func eq(x, y interface{}) (bool, error) {
 	if fv, ok := toFloat64(y); ok {
 		y = fv
 	}
+
+	if fv, ok := toStr(y); ok {
+		y = fv
+	}
+
 	return reflect.DeepEqual(x, y), nil
 }
 
