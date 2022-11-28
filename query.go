@@ -216,6 +216,15 @@ func in(x, y interface{}) (bool, error) {
 			}
 		}
 	}
+
+	if yv, ok := y.([]interface{}); ok {
+		for _, v := range yv {
+			if ok, _ := eq(x, v); ok {
+				return true, nil
+			}
+		}
+	}
+
 	return false, nil
 }
 
